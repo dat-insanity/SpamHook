@@ -44,6 +44,7 @@ if option == '1':
 			print("\33[40m\033[92mMessage sent successfully, code {}.".format(result.status_code))	
 			amount = amount - 1
 elif option == '2':
+	input('\033[1mPress enter to start, or control-c to quit: ')
 	def ascii(length):
 		asc = ''
 		for x in range(int(length)):
