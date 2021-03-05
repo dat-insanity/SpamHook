@@ -1,5 +1,5 @@
 ## An easy to use, discord webhook spammer.
-SpamHook was a discord webhook spammer that I made in my free time lol. Was just bored and wanted to experiment with discord webhooks so here we go I guess.\
+SpamHook was a discord webhook spammer that I made in my free time lol. Was just bored and wanted to experiment with discord webhooks so here we go I guess.
 ## How to install:
 1. Download Python 3.x
 2. Clone this project.
@@ -11,7 +11,9 @@ SpamHook was a discord webhook spammer that I made in my free time lol. Was just
 ## Features:
 Currently there are two modes, ascii and custom message. Ascii spammer creates a random string of messages that look like this `ᔺ⯦Ṕǲ଱⾊`, while the custom message allows you to input a, well, custom message. Ascii spammer can be used to cause lag, or crash other people's discord clients. SpamHook will detect when you get rate limited, and will pause when it happens. It will resume when it detects that it is not rate limited.
 ## Future Updates:
-- Multiple webhook support
+- [ ] Multiple webhook support
+- [ ] Multithreading
+- [x] Wordlist mode
 ## Donations:
 `BTC: 3PNq1CTkzE3ykNrS8iEzFPYgrnZzWtyER5`
 `ETH: 0xe3a9b959df21081da853dc7300d0689fe2abaf4e`
