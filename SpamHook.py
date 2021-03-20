@@ -8,6 +8,7 @@ import os
 import sys 
 import time
 import random
+from tkinter import colorchooser
 
 if sys.platform.startswith('win32'):
 	os.system('cls')
@@ -21,13 +22,13 @@ print("\33[35m `--. \ '_ \ / _` | '_ ` _ \|  _  |/ _ \ / _ \| |/ /")
 print('\33[35m/\__/ / |_) | (_| | | | | | | | | | (_) | (_) |   < ')
 print("\33[35m\____/| .__/ \__,_|_| |_| |_\_| |_/\___/ \___/|_|\_\\")
 print('\33[35m	| |                      made by dat_insanity :)')
-print('\33[35m	|_|                                         v1.1')
+print('\33[35m	|_|                                         v1.2')
 print()
 
 webhook = input('\33[31mPaste in your webhook URL: ')
 username = input('\33[31mInput the bot username: ')
 amount = int(input('\33[31mHow many times should the message send (input a negative number for unlimited): '))
-option =  input('\33[31mWhat mode do you pick, custom message (1), ascii spammer (2), or wordlist spammer (3): ') 
+option =  input('\33[31mWhat mode do you pick, custom message (1), ascii spammer (2), wordlist spammer (3), or embed spammer (4): ') 
 
 if option == '1':
 	msg = input('\33[31mPaste in your message: ')
@@ -88,10 +89,42 @@ elif option == '3':
 		for position, line in enumerate(f):
 			if position in convrandline:
 				data = {
-					"content" : line,
+					"content" : '@everyone' + line,
 					"username" : username
 				}
 		f.close()
+		result = requests.post(webhook, json = data)
+		try:
+			result.raise_for_status()
+		except requests.exceptions.HTTPError as err:
+			print(err)
+			print('\33[40m\033[91mPausing for a second, you may be rate limited. (usually clears up under a minute)')
+			time.sleep(1)
+		else:
+			print("\33[40m\033[92mMessage sent successfully, code {}.".format(result.status_code))	
+			amount = amount - 1
+
+if option == '4':
+	msg = input('\33[31mPaste in your embed description/message: ')
+	title = input('\33[31mPaste in your embed title: ')
+	print('\33[31mSelect your embed colour (a popup window should display): ')
+	color = colorchooser.askcolor()[1] # ask user for color, only takes the hex value
+	color = color[1:] # removes the hashtag in front of the hex value
+	color = int(color, 16) # convert hex to base 10 integer
+	url = input('\33[31mPaste in your embed link: ')
+	input('\033[1mPress enter to start, or control-c to quit: ')
+	data = {
+		"username" : username
+	}
+	data["embeds"] = [
+		{
+			"description" : msg,
+			"title" : title,
+			"url" : url,
+			"color" : color
+		}
+	]
+	while amount != 0:
 		result = requests.post(webhook, json = data)
 		try:
 			result.raise_for_status()
