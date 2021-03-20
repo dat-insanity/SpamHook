@@ -88,7 +88,7 @@ elif option == '3':
 		for position, line in enumerate(f):
 			if position in convrandline:
 				data = {
-					"content" : '@everyone' + line,
+					"content" : line,
 					"username" : username
 				}
 		f.close()
